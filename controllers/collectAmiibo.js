@@ -70,11 +70,22 @@ const handleCollect = async (req, res, pool) => {
                         }
                     })
                     .then((values) => {
-                        return pool.query(`DELETE FROM user_amiibo WHERE (user_id, amiibo_id, email, external_id) IN ?`, [values]);
+                        return pool.query(`DELETE FROM user_amiibo WHERE (user_id, amiibo_id, email, external_id) IN (?)`, [values]);
                     })
                 ])
-                console.log(result1);
-                console.log(result2);
+                
+                if (result1.status == 'fulfilled' && result2.status == 'fulfilled') {
+                    res.status(200).json("Amiibos added and removed from collection.");
+                }
+                else if (result1.status == 'fulfilled' && result2.status == 'rejected') {
+                    res.status(200).json("Amiibos added to collection, nothing removed from collection.")
+                }
+                else if (result1.status == 'rejected' && result2.status == 'fulfilled') {
+                    res.status(200).json("Amiibos removed from collection, nothing added to collection.");
+                }
+                else {
+                    res.status(400).json("No amiibos to add or remove from collection.");
+                }
             }
     }
     else {
