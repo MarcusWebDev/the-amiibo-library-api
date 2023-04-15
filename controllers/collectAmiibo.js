@@ -2,24 +2,13 @@ const util = require('util');
 
 const handleCollect = async (req, res, pool) => {
     const {user, amiibos} = req.body;
-    const externalIDs = amiibos.map((amiibo) => amiibo.external_id);
+    const externalIDs = amiibos.map((amiibo) => [amiibo.external_id]);
     const toBeAdded = amiibos.filter((amiibo) => amiibo.collected).map((amiibo) => amiibo.external_id);
     const toBeRemoved = amiibos.filter((amiibo) => !amiibo.collected).map((amiibo) => amiibo.external_id);
     let userExists = true;
 
     if (amiibos.length > 0) {
-        let userID = await pool.query('SELECT external_id FROM amiibo WHERE external_id IN (?)', [externalIDs])
-            .then(([rows, fields]) => {
-                const existingExternalIDs = rows.map((result) => result.external_id);
-                const toInsert = externalIDs.filter((externalID) => !existingExternalIDs.includes(externalID)).map((externalID) => [externalID]);
-
-                if (toInsert.length > 0) {
-                    return pool.query('INSERT INTO amiibo (external_id) VALUES ?', [toInsert]);
-                }
-                else {
-                    return;
-                }
-            })
+        let userID = await pool.query('INSERT IGNORE INTO amiibo (external_id) VALUES ?', [externalIDs])
             .then(() => {
                 return pool.query(`SELECT user_id FROM user WHERE email = ?`,[user.email])
             })
