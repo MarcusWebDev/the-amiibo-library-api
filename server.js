@@ -20,13 +20,6 @@ const pool = mysql.createPool({
     database: 'the-amiibo-library'
 });
 
-pool.query('SELECT 1 + 1 AS solution')
-    .then(([rows, fields]) => console.log(rows));
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
 app.post('/signIn', (req, res) => {signIn.handleSignIn(req, res, pool)});
 
 app.post('/collection', (req, res) => {collection.handleCollect(req, res, pool)});
