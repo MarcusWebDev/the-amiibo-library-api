@@ -67,7 +67,7 @@ const handleCollect = async (req, res, pool) => {
                     res.status(200).json("Amiibos added and removed from collection.");
                 }
                 else if (result1.status == 'fulfilled' && result2.status == 'rejected') {
-                    res.status(200).json("Amiibos added to collection, nothing removed from collection.")
+                    res.status(201).json("Amiibos added to collection, nothing removed from collection.")
                 }
                 else if (result1.status == 'rejected' && result2.status == 'fulfilled') {
                     res.status(200).json("Amiibos removed from collection, nothing added to collection.");
