@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 4000;
 const mysql = require('mysql2/promise');
@@ -11,6 +12,7 @@ const getLeastCollected = require('./controllers/getLeastCollected');
 require('dotenv').config();
 
 app.use(express.json());
+app.use(cors());
 
 const pool = mysql.createPool({
     connectionLimit: 100,

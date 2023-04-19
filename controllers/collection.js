@@ -2,9 +2,9 @@ const util = require('util');
 
 const handleCollect = async (req, res, pool) => {
     const {user, amiibos} = req.body;
-    const externalIDs = amiibos.map((amiibo) => [amiibo.external_id]);
-    const toBeAdded = amiibos.filter((amiibo) => amiibo.collected).map((amiibo) => amiibo.external_id);
-    const toBeRemoved = amiibos.filter((amiibo) => !amiibo.collected).map((amiibo) => amiibo.external_id);
+    const externalIDs = amiibos.map((amiibo) => ["" + amiibo.head + amiibo.tail]);
+    const toBeAdded = amiibos.filter((amiibo) => amiibo.collected).map((amiibo) => "" + amiibo.head + amiibo.tail);
+    const toBeRemoved = amiibos.filter((amiibo) => !amiibo.collected).map((amiibo) => "" + amiibo.head + amiibo.tail);
     let userExists = true;
 
     if (amiibos.length > 0) {
@@ -67,7 +67,7 @@ const handleCollect = async (req, res, pool) => {
                     res.status(200).json("Amiibos added and removed from collection.");
                 }
                 else if (result1.status == 'fulfilled' && result2.status == 'rejected') {
-                    res.status(201).json("Amiibos added to collection, nothing removed from collection.")
+                    res.status(200).json("Amiibos added to collection, nothing removed from collection.")
                 }
                 else if (result1.status == 'rejected' && result2.status == 'fulfilled') {
                     res.status(200).json("Amiibos removed from collection, nothing added to collection.");

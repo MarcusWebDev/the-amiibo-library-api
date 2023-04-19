@@ -13,7 +13,8 @@ const handleGetMostCollected = async (req, res, pool) => {
             });
             
             res.status(200).json(result);
-        });
+        })
+        .catch((e) => console.log(e));
 }
 
 module.exports = {

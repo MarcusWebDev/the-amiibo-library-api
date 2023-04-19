@@ -12,6 +12,7 @@ const handleGetAmiibo = async (req, res, pool) => {
                 res.status(400).json("User does not have any amiibos or user does not exist.");
             }
         })
+        .catch((e) => console.log(e));
 }
 
 module.exports = {
