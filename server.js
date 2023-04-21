@@ -22,15 +22,15 @@ const pool = mysql.createPool({
     database: 'the-amiibo-library'
 });
 
-app.post('/signIn', (req, res) => {signIn.handleSignIn(req, res, pool)});
+app.post('/api/signIn', (req, res) => {signIn.handleSignIn(req, res, pool)});
 
-app.post('/collection', (req, res) => {collection.handleCollect(req, res, pool)});
+app.post('/api/collection', (req, res) => {collection.handleCollect(req, res, pool)});
 
-app.get('/amiibo/:email', (req, res,) => {getAmiibo.handleGetAmiibo(req, res, pool)});
+app.get('/api/amiibo/:email', (req, res,) => {getAmiibo.handleGetAmiibo(req, res, pool)});
 
-app.get('/amiibo/mostCollected/:amount', (req, res) => { getMostCollected.handleGetMostCollected(req, res, pool)});
+app.get('/api/amiibo/mostCollected/:amount', (req, res) => { getMostCollected.handleGetMostCollected(req, res, pool)});
 
-app.get('/amiibo/leastCollected/:amount', (req, res) => { getLeastCollected.handleGetLeastCollected(req, res, pool)});
+app.get('/api/amiibo/leastCollected/:amount', (req, res) => { getLeastCollected.handleGetLeastCollected(req, res, pool)});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
