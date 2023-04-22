@@ -19,7 +19,8 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
-    database: 'the-amiibo-library'
+    database: 'the-amiibo-library',
+    port: 3306
 });
 
 app.post('/signIn', (req, res) => {signIn.handleSignIn(req, res, pool)});
