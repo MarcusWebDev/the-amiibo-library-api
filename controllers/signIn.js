@@ -1,4 +1,5 @@
 const handleSignIn = (req, res, pool) => {
+    console.log(req.url);
     const {user} = req.body;
 
     pool.query('INSERT IGNORE INTO user (email) VALUES (?)', [user.email])

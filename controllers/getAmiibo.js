@@ -1,6 +1,7 @@
 const util = require('util');
 
 const handleGetAmiibo = async (req, res, pool) => {
+    console.log(req.url);
     const email = req.params.email;
     pool.query('SELECT external_id FROM user_amiibo WHERE email = ?', [email])
         .then(([rows, fields]) => {

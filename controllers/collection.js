@@ -1,6 +1,7 @@
 const util = require('util');
 
 const handleCollect = async (req, res, pool) => {
+    console.log(req.url);
     const {user, amiibos} = req.body;
     const externalIDs = amiibos.map((amiibo) => ["" + amiibo.head + amiibo.tail]);
     const toBeAdded = amiibos.filter((amiibo) => amiibo.collected).map((amiibo) => "" + amiibo.head + amiibo.tail);
