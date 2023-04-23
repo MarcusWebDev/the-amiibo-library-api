@@ -11,7 +11,7 @@ const getLeastCollected = require('./controllers/getLeastCollected');
 
 require('dotenv').config();
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 app.use(cors());
 
 const pool = mysql.createPool({
