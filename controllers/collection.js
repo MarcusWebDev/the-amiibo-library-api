@@ -39,7 +39,7 @@ const handleCollect = async (req, res, pool) => {
                 .query("SELECT * FROM amiibo WHERE external_id IN (?)", [
                   toBeAdded,
                 ])
-                .then(([rows, fields]) => {
+                .then(([rows]) => {
                   return Promise.resolve(
                     rows.map((row) => [
                       userID,
