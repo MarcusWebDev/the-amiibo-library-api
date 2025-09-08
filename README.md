@@ -6,11 +6,11 @@ The API for The Amiibo Library.
 
 ### `POST /signIn`
 
-This endpoint takes a `user` object in the request body and creates a user in the datbase using the `user`'s `email` field. If a user already exists in the database with the provided email, then the endpoint does nothing.
+Takes a `user` object in the request body and creates a user in the datbase using the `user`'s `email` field. If a user already exists in the database with the provided email, then the endpoint does nothing.
 
 ### `POST /collection`
 
-This endpoint takes a `user` object and an `amiibos` array in the request body. It checks if the user exists in the database, if they do, then it will add any amiibo with the `collected` field set to `true` to the user's collection. If the amiibo is in the array and the `collected` field resolves to `false` then it will remove that amiibo from the user's collection.
+Takes a `user` object and an `amiibos` array in the request body and checks if the user exists in the database, if they do, then this endpoint will add any amiibo with the `collected` field set to `true` to the user's collection. If the amiibo is in the array and the `collected` field resolves to `false` then it will remove that amiibo from the user's collection.
 
 ### `GET /amiibo/:email`
 
